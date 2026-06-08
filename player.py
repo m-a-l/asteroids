@@ -1,6 +1,7 @@
+import random
+
 import pygame
 
-from circleshape import CircleShape
 from constants import (
     LINE_WIDTH,
     PLAYER_RADIUS,
@@ -9,6 +10,7 @@ from constants import (
     PLAYER_TURN_SPEED,
     SHOT_SPEED,
 )
+from particle import Particle
 from shot import Shot
 
 
@@ -48,6 +50,11 @@ class Player(CircleShape):
         self.shoot_cooldown = PLAYER_SHOOT_COOLDOWN_SECONDS
         shot = Shot(self.position.x, self.position.y)
         shot.velocity = pygame.Vector2(0, 1).rotate(self.rotation) * SHOT_SPEED
+
+    def explode(self, screen: pygame.Surface) -> None:
+        for i in range(1, 10):
+            Particle(self.position.x, self.position.y)
+            self.kill()
 
     def triangle(self) -> list[pygame.Vector2]:
         forward = pygame.Vector2(0, 1).rotate(self.rotation)

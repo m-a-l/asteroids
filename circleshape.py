@@ -19,12 +19,10 @@ class CircleShape(pygame.sprite.Sprite):
         self.radius = radius
 
     def draw(self, screen: pygame.Surface) -> None:
-        # must override
-        pass
+        raise NotImplementedError("must implement draw")
 
     def update(self, dt: float) -> None:
-        # must override
-        pass
+        raise NotImplementedError("must implement update")
 
     def collides_with(self, other: "CircleShape") -> bool:
         distance = self.position.distance_to(other.position)
